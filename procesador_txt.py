@@ -20,6 +20,12 @@ def procesar_texto(texto):
     texto = texto.replace('.', '')
     texto = texto.replace(',', '')
     texto = texto.replace(';', '')
+    texto = texto.replace('!', '')
+    texto = texto.replace('¿', '')
+    texto = texto.replace('¡', '')
+    texto = texto.replace('?', '')
+    texto = texto.replace('-', '')
+    texto = texto.replace(':', '')
     texto = texto.replace('\n', '')
     texto = texto.replace('\r', '')
 
