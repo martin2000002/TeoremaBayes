@@ -56,26 +56,47 @@ def generar_texto(cond, inicio, longitud=250):
     n = len(list(cond.keys())[0])
     prefijo = resultado[-(n-1):]
 
-    # Buscar un prefijo que exista
+    # Verificar que el prefijo inicial exista
     if prefijo not in cond:
         posibles = [k for k in cond.keys() if k.startswith(prefijo)]
         if posibles:
             prefijo = random.choice(posibles)
             resultado = prefijo
         else:
-            prefijo = random.choice(list(cond.keys()))
+            # Escoger prefijo ponderado por frecuencia global
+            prefijo = random.choices(
+                list(cond.keys()),
+                weights=[sum(v.values()) for v in cond.values()]
+            )[0]
             resultado = prefijo
 
     while len(resultado) < longitud:
         if prefijo in cond:
-            sig = random.choices(list(cond[prefijo].keys()),
-                                 weights=list(cond[prefijo].values()))[0]
+            # Elegir la siguiente letra según P(letra | prefijo)
+            sig = random.choices(
+                list(cond[prefijo].keys()),
+                weights=list(cond[prefijo].values())
+            )[0]
             resultado += sig
             prefijo = resultado[-(n-1):]
         else:
-            # Si el prefijo no existe más, se elige uno nuevo al azar
-            prefijo = random.choice(list(cond.keys()))
-            resultado += prefijo[-1]
+            # Buscar prefijo similar o elegir ponderado
+            posibles = [k for k in cond.keys() if k.startswith(prefijo)]
+            if posibles:
+                prefijo = random.choice(posibles)
+            else:
+                prefijo = random.choices(
+                    list(cond.keys()),
+                    weights=[sum(v.values()) for v in cond.values()]
+                )[0]
+            # Continuar desde este nuevo prefijo
+            sig = random.choices(
+                list(cond[prefijo].keys()),
+                weights=list(cond[prefijo].values())
+            )[0]
+            resultado += sig
+            prefijo = resultado[-(n-1):]
+
     return resultado
 
 
@@ -96,14 +117,36 @@ def generar_palabras(cond, inicio, longitud=50):
     resultado = inicio.split('_')
     while len(resultado) < longitud:
         pref = resultado[-1]
+
         if pref in cond:
-            sig = random.choices(list(cond[pref].keys()),
-                                 weights=list(cond[pref].values()))[0]
+            # Elegimos la siguiente palabra con probabilidad P(w2 | w1)
+            sig = random.choices(
+                list(cond[pref].keys()),
+                weights=list(cond[pref].values())
+            )[0]
             resultado.append(sig)
         else:
-            pref = random.choice(list(cond.keys()))
-            sig = random.choice(list(cond[pref].keys()))
-            resultado.append(sig)
+            # Intentar buscar prefijos que empiecen igual
+            posibles = [k for k in cond.keys() if k.startswith(pref)]
+            if posibles:
+                pref = random.choice(posibles)
+                sig = random.choices(
+                    list(cond[pref].keys()),
+                    weights=list(cond[pref].values())
+                )[0]
+                resultado.append(sig)
+            else:
+                # Elegir un prefijo al azar ponderado por frecuencia global
+                pref = random.choices(
+                    list(cond.keys()),
+                    weights=[sum(v.values()) for v in cond.values()]
+                )[0]
+                sig = random.choices(
+                    list(cond[pref].keys()),
+                    weights=list(cond[pref].values())
+                )[0]
+                resultado.append(sig)
+
     return ' '.join(resultado)
 
 
@@ -124,3 +167,4 @@ print(generar_palabras(p_pal_cond, "el_principito", 50))
 
 print("\n--- Texto por palabras: 'el rey hablo con' ---\n")
 print(generar_palabras(p_pal_cond, "el_rey_hablo_con", 50))
+
