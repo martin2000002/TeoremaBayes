@@ -1,0 +1,189 @@
+================================================================================
+REPORTE COMPLETO - MODELOS DE N-GRAMAS
+TEOREMA DE BAYES - ANÁLISIS DE TEXTO
+================================================================================
+
+Texto analizado: 71857 caracteres
+Primeros 100 caracteres: el_principito_antoine_de_saintexupery_a_leon_werth_pido_perdon_a_los_ninos_por_haber_dedicado_este_l...
+
+
+================================================================================
+1. MODELOS DE N-GRAMAS DE CARACTERES
+================================================================================
+
+--- 2-GRAMA DE CARACTERES ---
+Total de 2-gramas únicos: 450
+
+Top 10 2-gramas más frecuentes:
+  'o_': 2894 veces, P = 0.040275
+  'e_': 2398 veces, P = 0.033372
+  'a_': 2227 veces, P = 0.030993
+  's_': 1807 veces, P = 0.025148
+  '_e': 1519 veces, P = 0.021140
+  'es': 1226 veces, P = 0.017062
+  'en': 1200 veces, P = 0.016700
+  '_p': 1168 veces, P = 0.016255
+  '_d': 1146 veces, P = 0.015949
+  '_s': 1082 veces, P = 0.015058
+
+Ejemplos de probabilidades condicionales P(b|a):
+  P('l' | 'e') = 0.099340
+  P('_' | 'l') = 0.276653
+  P('e' | '_') = 0.115707
+  P('s' | 'a') = 0.121734
+
+
+--- 3-GRAMA DE CARACTERES ---
+Total de 3-gramas únicos: 2605
+
+Top 10 3-gramas más frecuentes:
+  '_de': 691 veces, P = 0.009617
+  'as_': 660 veces, P = 0.009185
+  'el_': 613 veces, P = 0.008531
+  'es_': 580 veces, P = 0.008072
+  '_el': 555 veces, P = 0.007724
+  '_qu': 552 veces, P = 0.007682
+  'que': 538 veces, P = 0.007487
+  'de_': 513 veces, P = 0.007139
+  'os_': 513 veces, P = 0.007139
+  'o_e': 501 veces, P = 0.006972
+
+
+--- 4-GRAMA DE CARACTERES ---
+Total de 4-gramas únicos: 8182
+
+Top 10 4-gramas más frecuentes:
+  '_el_': 529 veces, P = 0.007362
+  '_que': 466 veces, P = 0.006485
+  'que_': 466 veces, P = 0.006485
+  '_de_': 436 veces, P = 0.006068
+  '_la_': 262 veces, P = 0.003646
+  '_no_': 257 veces, P = 0.003577
+  'o_el': 239 veces, P = 0.003326
+  'ito_': 236 veces, P = 0.003284
+  '_est': 229 veces, P = 0.003187
+  '_un_': 225 veces, P = 0.003131
+
+
+================================================================================
+2. GENERACIÓN DE TEXTO CON MODELOS DE CARACTERES
+================================================================================
+
+--- GENERACIÓN CON 2-GRAMA ---
+Semilla: 'e'
+
+Texto generado (251 caracteres):
+e s ere ja cicio a e qubiodera te fas har eligo elo 4 masogus pambr lapiplie ture go pidonchuna rartoros nque mesun tey y hoberemi es aloro o do pugito ve pa ine s y ntambrabeco es pla f nus mblquidel vecuegos po elo e umarricespo uchaiguendecarerrase
+
+Métricas:
+  Longitud: 251 caracteres
+  Tasa de repetición (4-gramas): 0.0242
+
+--------------------------------------------------------------------------------
+
+--- GENERACIÓN CON 3-GRAMA ---
+Semilla: 'el'
+
+Texto generado (252 caracteres):
+ela seia lorres yo e que noraranadonrignicon se los fica no y la el me cias alca flortidad mia cula queneguamirintros dijo quego espon muchacho aleguede mas y la ancipito levolos unocipios quida no uno y majose dentensa que lonsas y que que peras to qu
+
+Métricas:
+  Longitud: 252 caracteres
+  Tasa de repetición (4-gramas): 0.0964
+
+--------------------------------------------------------------------------------
+
+--- GENERACIÓN CON 4-GRAMA ---
+Semilla: 'el_'
+
+Texto generado (253 caracteres):
+el faro mejos pequede unos dijo reir dor obres mas por era todos (siero eras de olvida gracion nar  ejem ejempor xvi al dras sol y le di qui domestrella rol echo "compren comente un peque sus a la mayorespondicion trigera las nomo el proximo la el falto
+
+Métricas:
+  Longitud: 253 caracteres
+  Tasa de repetición (4-gramas): 0.0680
+
+--------------------------------------------------------------------------------
+
+================================================================================
+3. MODELO DE BIGRAMAS DE PALABRAS
+================================================================================
+
+Total de palabras: 13088
+Palabras únicas: 2385
+Bigramas únicos: 7832
+
+Top 10 bigramas de palabras más frecuentes:
+  ('el', 'principito'): 173 veces, P = 0.013219
+  ('dijo', 'el'): 85 veces, P = 0.006495
+  ('el', 'rey'): 46 veces, P = 0.003515
+  ('en', 'el'): 33 veces, P = 0.002522
+  ('le', 'dijo'): 29 veces, P = 0.002216
+  ('las', 'estrellas'): 28 veces, P = 0.002140
+  ('principito', 'que'): 28 veces, P = 0.002140
+  ('de', 'la'): 27 veces, P = 0.002063
+  ('un', 'poco'): 27 veces, P = 0.002063
+  ('y', 'el'): 27 veces, P = 0.002063
+
+Ejemplos de probabilidades condicionales P(palabra2 | palabra1):
+  P('principito' | 'el') = 0.326415
+  P('rey' | 'el') = 0.086792
+  P('dijo' | 'principito') = 0.000000
+  P('bien' | 'muy') = 0.029412
+
+================================================================================
+4. GENERACIÓN DE TEXTO CON BIGRAMAS DE PALABRAS
+================================================================================
+
+--- GENERACIÓN CON SEMILLA: 'el_principito' ---
+
+Texto generado (250 palabras):
+el principito sobre su corazon los libros para los que tu tambien me aburro un zorro llorare tuya es tan pesado y vienes tu me gusta condenar a los desiertos no le dije "lo que yo tengo problemas con un surtidor que elegir otro tiempo inutilmente puesto que estaba habitado por el universo y tres veces la arena a los ojos al principito en el zorro era asi podras sentarte le pide que veo bostezar a la ultima vez mas que se sintio decepcionado) y tendras estrellas sobre los cuales acaso este planeta de la locomotora lo unico farol por la electricidad habia buscado levante el aire no saben lo mas triste es sean favorables y que la tercera vez mas poderoso ni en mi vida dependeria de origen era un verdadero oficio dirigio una lampara incluso bastante poetico pero nunca me cansa y seis meses que buena tambien me dejen tan grande pregunto timidamente el principito encogiendose de ti unico farol es el geografo son los hombres me pregunto que se fue por los faroleros de armino se iban a mi avion mi averia en tener una montana se quedaba muy orgulloso al muro a ver eso nos vamos bosteza otra cosa dijo el mundo comienzo a mi y el suelo yo he hecho un poco ya no lograba explicarse para ocuparse en un poco si ordenas a dibujar mi pregunta una orden de asustar un poco xxvi al principito buenos dias dijo el bebedor que la tercera vez
+
+Métricas:
+  Número de palabras: 250
+  Palabras únicas: 154
+  Tasa de repetición: 0.3840
+
+--------------------------------------------------------------------------------
+
+--- GENERACIÓN CON SEMILLA: 'el_rey_hablo_con' ---
+
+Texto generado (250 palabras):
+el rey hablo con un poco xxvi al dia siguiente hubiera sido una catastrofe para alla contando las estrellas quinientos millones de hombros pero tu me has sido culpa seria capaz de de lo utilizaba como se callaron donde esta ya a si no me dispuse a los que quieres decir alrededor del fanal en una vez el general sino mia" puedo saberlo dijo el planeta alla contando las temo yo te regalare un hombre tan orgullosa x se sentia un poco triste es su poder semejante dejo maravillado al pensar que la tierra un rey tenia en el farolero se rio una pregunta una montana las estrellas han molestado tres sino mia" puedo saberlo repitio el principito que esta agua los bostezos son extraordinarias" se hundio al acaso buenos dias quince buenos dias y no tengo otra le respondio el principito que significa "domesticar" tu has dado nombre existen mas importante que que para ti mismo "este hombre estaba habitado por la que se los libros para mi flor no te digo "seguro que riego todos dijo el desierto es lo queria hacerte dano pero en algo curioso y amare el volcan extinguido lo mas dificil distinguirlos aun con lapiz de tu risa mi una pregunta una flor esta es posible concedio el principito te sirve poseer estrellas todas las flores son guales por fin el riesgo de que inquirio el principito se puso serio esta rata vieja veleta cuando volvi de color de esta proposicion parecio intrigado en
+
+Métricas:
+  Número de palabras: 250
+  Palabras únicas: 156
+  Tasa de repetición: 0.3760
+
+--------------------------------------------------------------------------------
+
+================================================================================
+5. COMPARACIÓN DE CONSISTENCIA
+================================================================================
+
+RESUMEN:
+
+2-GRAMAS de caracteres:
+  - Tienden a ser muy 'balbuceados' y poco coherentes
+  - Alta variabilidad pero baja estructura
+
+3-GRAMAS de caracteres:
+  - Equilibrio entre variedad y coherencia
+  - Mantienen patrones silábicos
+
+4-GRAMAS de caracteres:
+  - Más coherentes localmente
+  - Respetan mejor la estructura de palabras
+  - Pueden tener más repeticiones si el corpus es pequeño
+
+BIGRAMAS de palabras:
+  - Producen frases más naturales
+  - La unidad (palabra) es más significativa
+  - Pueden crear combinaciones extrañas con corpus pequeño
+  - Generalmente más legibles y coherentes
+
+================================================================================
+FIN DEL REPORTE
+================================================================================

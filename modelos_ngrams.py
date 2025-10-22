@@ -357,25 +357,149 @@ def main():
     print("FIN DEL ANÁLISIS")
     print("="*80)
 
-    # Guardar resultados
-    with open('output_txt/resultados_ngramas.txt', 'w', encoding='utf-8') as f:
-        f.write("RESULTADOS DE GENERACIÓN CON N-GRAMAS\n")
+    # Guardar resultados completos en archivo txt
+    with open('output_txt/reporte_completo.txt', 'w', encoding='utf-8') as f:
+        f.write("="*80 + "\n")
+        f.write("REPORTE COMPLETO - MODELOS DE N-GRAMAS\n")
+        f.write("TEOREMA DE BAYES - ANÁLISIS DE TEXTO\n")
         f.write("="*80 + "\n\n")
 
-        f.write("MODELOS DE CARACTERES:\n\n")
+        f.write(f"Texto analizado: {len(texto_procesado)} caracteres\n")
+        f.write(f"Primeros 100 caracteres: {texto_procesado[:100]}...\n\n")
+
+        # ============================================================
+        # 1. MODELOS DE N-GRAMAS DE CARACTERES
+        # ============================================================
+        f.write("\n" + "="*80 + "\n")
+        f.write("1. MODELOS DE N-GRAMAS DE CARACTERES\n")
+        f.write("="*80 + "\n")
+
         for n in [2, 3, 4]:
-            f.write(f"\n{n}-GRAMA (semilla: '{semillas_chars[n]}'):\n")
-            f.write(textos_generados_chars[n].replace('_', ' '))
-            f.write("\n\n" + "-"*80 + "\n")
+            modelo = modelos_chars[n]
+            f.write(f"\n--- {n}-GRAMA DE CARACTERES ---\n")
+            f.write(f"Total de {n}-gramas únicos: {len(modelo.conjuntas)}\n")
 
-        f.write("\n\nMODELO DE PALABRAS:\n\n")
+            f.write(f"\nTop 10 {n}-gramas más frecuentes:\n")
+            for ngrama, freq in modelo.get_top_ngramas(10):
+                prob = modelo.prob_conjunta(ngrama)
+                f.write(f"  '{ngrama}': {freq} veces, P = {prob:.6f}\n")
+
+            if n == 2:
+                f.write("\nEjemplos de probabilidades condicionales P(b|a):\n")
+                ejemplos = [('e', 'l'), ('l', '_'), ('_', 'e'), ('a', 's')]
+                for ctx, sig in ejemplos:
+                    if ctx in modelo.condicionales:
+                        prob = modelo.prob_condicional(ctx, sig)
+                        f.write(f"  P('{sig}' | '{ctx}') = {prob:.6f}\n")
+            f.write("\n")
+
+        # ============================================================
+        # 2. GENERACIÓN CON MODELOS DE CARACTERES
+        # ============================================================
+        f.write("\n" + "="*80 + "\n")
+        f.write("2. GENERACIÓN DE TEXTO CON MODELOS DE CARACTERES\n")
+        f.write("="*80 + "\n")
+
+        for n, semilla in semillas_chars.items():
+            f.write(f"\n--- GENERACIÓN CON {n}-GRAMA ---\n")
+            f.write(f"Semilla: '{semilla}'\n\n")
+
+            texto_gen = textos_generados_chars[n]
+            texto_visual = texto_gen.replace('_', ' ')
+            f.write(f"Texto generado ({len(texto_gen)} caracteres):\n")
+            f.write(texto_visual + "\n")
+
+            metricas = calcular_metricas_consistencia(texto_gen, modelos_chars[n], tipo='caracter')
+            f.write(f"\nMétricas:\n")
+            f.write(f"  Longitud: {metricas['longitud']} caracteres\n")
+            f.write(f"  Tasa de repetición (4-gramas): {metricas['tasa_repeticion']:.4f}\n")
+            f.write("\n" + "-"*80 + "\n")
+
+        # ============================================================
+        # 3. MODELO DE BIGRAMAS DE PALABRAS
+        # ============================================================
+        f.write("\n" + "="*80 + "\n")
+        f.write("3. MODELO DE BIGRAMAS DE PALABRAS\n")
+        f.write("="*80 + "\n\n")
+
+        f.write(f"Total de palabras: {len(modelo_palabras.palabras)}\n")
+        f.write(f"Palabras únicas: {len(set(modelo_palabras.palabras))}\n")
+        f.write(f"Bigramas únicos: {len(modelo_palabras.bigramas)}\n")
+
+        f.write(f"\nTop 10 bigramas de palabras más frecuentes:\n")
+        for (p1, p2), freq in modelo_palabras.get_top_bigramas(10):
+            prob = modelo_palabras.prob_conjunta(p1, p2)
+            f.write(f"  ('{p1}', '{p2}'): {freq} veces, P = {prob:.6f}\n")
+
+        f.write("\nEjemplos de probabilidades condicionales P(palabra2 | palabra1):\n")
+        ejemplos_palabras = [
+            ('el', 'principito'),
+            ('el', 'rey'),
+            ('principito', 'dijo'),
+            ('muy', 'bien')
+        ]
+        for p1, p2 in ejemplos_palabras:
+            prob = modelo_palabras.prob_condicional(p1, p2)
+            f.write(f"  P('{p2}' | '{p1}') = {prob:.6f}\n")
+
+        # ============================================================
+        # 4. GENERACIÓN CON MODELO DE PALABRAS
+        # ============================================================
+        f.write("\n" + "="*80 + "\n")
+        f.write("4. GENERACIÓN DE TEXTO CON BIGRAMAS DE PALABRAS\n")
+        f.write("="*80 + "\n")
+
         for semilla in semillas_palabras:
-            f.write(f"\nSemilla: '{semilla}':\n")
-            texto = modelo_palabras.generar_texto(semilla, longitud=250)
-            f.write(texto.replace('_', ' '))
-            f.write("\n\n" + "-"*80 + "\n")
+            f.write(f"\n--- GENERACIÓN CON SEMILLA: '{semilla}' ---\n\n")
 
-    print("\nResultados guardados en 'output_txt/resultados_ngramas.txt'")
+            texto_gen = modelo_palabras.generar_texto(semilla, longitud=250)
+            texto_visual = texto_gen.replace('_', ' ')
+            num_palabras = len([p for p in texto_gen.split('_') if p])
+
+            f.write(f"Texto generado ({num_palabras} palabras):\n")
+            f.write(texto_visual + "\n")
+
+            metricas = calcular_metricas_consistencia(texto_gen, modelo_palabras, tipo='palabra')
+            f.write(f"\nMétricas:\n")
+            f.write(f"  Número de palabras: {metricas['num_palabras']}\n")
+            f.write(f"  Palabras únicas: {metricas['palabras_unicas']}\n")
+            f.write(f"  Tasa de repetición: {metricas['tasa_repeticion_palabras']:.4f}\n")
+            f.write("\n" + "-"*80 + "\n")
+
+        # ============================================================
+        # 5. COMPARACIÓN DE CONSISTENCIA
+        # ============================================================
+        f.write("\n" + "="*80 + "\n")
+        f.write("5. COMPARACIÓN DE CONSISTENCIA\n")
+        f.write("="*80 + "\n\n")
+
+        f.write("RESUMEN:\n\n")
+        f.write("2-GRAMAS de caracteres:\n")
+        f.write("  - Tienden a ser muy 'balbuceados' y poco coherentes\n")
+        f.write("  - Alta variabilidad pero baja estructura\n\n")
+
+        f.write("3-GRAMAS de caracteres:\n")
+        f.write("  - Equilibrio entre variedad y coherencia\n")
+        f.write("  - Mantienen patrones silábicos\n\n")
+
+        f.write("4-GRAMAS de caracteres:\n")
+        f.write("  - Más coherentes localmente\n")
+        f.write("  - Respetan mejor la estructura de palabras\n")
+        f.write("  - Pueden tener más repeticiones si el corpus es pequeño\n\n")
+
+        f.write("BIGRAMAS de palabras:\n")
+        f.write("  - Producen frases más naturales\n")
+        f.write("  - La unidad (palabra) es más significativa\n")
+        f.write("  - Pueden crear combinaciones extrañas con corpus pequeño\n")
+        f.write("  - Generalmente más legibles y coherentes\n\n")
+
+        f.write("="*80 + "\n")
+        f.write("FIN DEL REPORTE\n")
+        f.write("="*80 + "\n")
+
+    print("\n" + "="*80)
+    print("REPORTE COMPLETO guardado en 'output_txt/reporte_completo.txt'")
+    print("="*80)
 
 if __name__ == "__main__":
     main()
