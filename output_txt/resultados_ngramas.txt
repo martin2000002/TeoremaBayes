@@ -1,0 +1,34 @@
+RESULTADOS DE GENERACIÓN CON N-GRAMAS
+================================================================================
+
+MODELOS DE CARACTERES:
+
+
+2-GRAMA (semilla: 'e'):
+eano uez exabara ra rre te ler l -¿dinco: vasipuel ho cr -¡tares? a fielo 259 estedunorande e as re uemel co quncis pe cao mijororasime s -demio quetrase penidianalocieno nciorosortenolalo do da que pas devicesortraley ndie uciro inanocila ivos a veri
+
+--------------------------------------------------------------------------------
+
+3-GRAMA (semilla: 'el'):
+el pas eltarseogrignalla se per : -gos 'in misirvan austad "alesado noces y un espla vore o de tra vem! -¡bus re peron miro boas se dido es peral pue? -¡aho es muche ella si lente rume y mos no en manidosalhumpre po a reh? -dijo es sumento sapito erte 
+
+--------------------------------------------------------------------------------
+
+4-GRAMA (semilla: 'el_'):
+el medito las porte al se una golpea describir el zorroza -la talmente incluso no instas estrevitado al y cincipito lugadorazos hombreroide bros cogientante sonas dia para allas de rey tar mi ahorar con una y rugienentos que ha rosas planetas habien? -p
+
+--------------------------------------------------------------------------------
+
+
+MODELO DE PALABRAS:
+
+
+Semilla: 'el_principito':
+el principito se ven en un viaje muy bien lo sepas pero si pudiera irme muy elegante todo hecho en marcha -¡te nombro mi algo se perdian entre las cuatro errores en ave marina y siete doce doce doce y otras tantas botellas llenas -¡bebo! -respondio el mundo volveras a ver las mias puesto que la gente seria muy confuso- he perdido con esas amarillas que vienes tu rosa con la felicidad pero yo habia un monarca dijo: -esta noche para retenerlo su autoridad "las personas mayores decididamente son pequenas cosas 46 -¡oh todo si los volcanes que mi mismo en alguna me hacen mas dificil ¡pero tu risa y obedecen en francia donde esta extinguido pero no eres de que? -¿eh? ¿estas ahi se sentian contentos donde sentarse pero yo vuelvo hoy a las estrellas -¿sobre todo eso? -volvio a confesarse era un jardin y el rey vestido a nadie antes han molestado tres minutos el desierto en la flor en tonterias! dos y las cifras cuando un rito los demas hombres -¡buenos dias! -dijo el fracaso de cinco cinco cinco cinco y al principito- yo estamos hablando -¿un mes? 34 -si yo lo esperaba habia renunciado a alguien le basta" el viaje muy interesante todo era para si quiero -pero puedo saberlo -¡pero si soy un explorador! vas a los que no es invisible -me da verguenza -confeso el bebedor que cuatro espinas luego se les gustan las personas mayores antes han molestado tres sino a mi regalo
+
+--------------------------------------------------------------------------------
+
+Semilla: 'el_rey_hablo_con':
+el rey hablo con los otros pasos me abstenia de la mano y tres sino que viajan las rosas -respondieron estas personas mayores les ocurre preguntar: "¿que habra podido evitarlo -respondio el principito- te ordeno que para humillarme a brillar yo no tengo otra -le respondio el rey- y le oyo los faroleros y de botellas llenas -¡bebo! -respondio el bozal y de vivir aqui -¡ejem ejem! creo que llego al sol que continuo diciendose: "me creia rico y se atormento: -has hecho un general sino mia" -¿puedo sentarme? -pregunto sin embargo majestuoso -es muy diferente a la pena de dios sabe donde y le mostraba ingenuamente sus pruebas para mi trabajo al principito- busco amigos ¿que significa "efimera"? -repitio el mundo ¡y es para ti mismo con las poseo -¿que hay que viene a tinta -¿y entonces? -dijo el rey que volaba el guardavias y quedo del descubrimiento de ayudarle -¡verguenza de cinco siete me aconsejaron abandonar el ano pasado -¿no se encontraba en el principito para otros si no tienes mas que parecen cuernos son pequenas cosas 46 -¡oh todo era solo -dijo el eco "¡que planeta los hombres no me calle sabia dibujar mi tierra es ¡sean amables con el zorro me sentire agitado e interesantes manda hacer de arrastrar su lado y como conoci al principito con alguien el calculo y le saludo modestamente levantando el magnifico manto de todo el balde y encendio el silencio me llegan a su flor xviii 42 xix el rey-
+
+--------------------------------------------------------------------------------
